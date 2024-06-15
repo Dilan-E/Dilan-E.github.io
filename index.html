@@ -8,12 +8,45 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #ff004c, #2200ff);
             color: #f0f0f0;
             text-align: center;
             margin: 0;
             padding: 0;
+            animation: backgroundFade 5s infinite alternate;
         }
+
+        @keyframes backgroundFade {
+            0% { background-color: #ff004c; }
+            100% { background-color: #2200ff; }
+        }
+
+        .video-background {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            animation: contentFadeIn 2s ease-in-out;
+            padding-bottom: 50px;
+        }
+
+        @keyframes contentFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         h1 {
             background-color: rgba(0, 0, 0, 0.7);
             color: #ffffff;
@@ -21,21 +54,60 @@
             padding: 20px 0;
             text-transform: uppercase;
             letter-spacing: 3px;
+            text-shadow: 2px 2px 4px #000000;
+            animation: slideInDown 1s ease-in-out;
         }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
         .miembro {
             margin: 20px;
             padding: 20px;
             border: 1px solid #555;
             border-radius: 10px;
             background-color: rgba(0, 0, 0, 0.7);
-            animation: slide-up 0.5s ease forwards, fade-in 0.5s ease forwards;
         }
+
         .nombre, .descripcion {
             color: #fff;
         }
+
         .descripcion {
             font-style: italic;
         }
+
+        .miembro:hover .nombre, .miembro:hover .descripcion {
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        a {
+            color: #00ff99;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             .miembro {
                 margin: 10px;
@@ -46,65 +118,53 @@
                 font-size: 1.5em;
             }
         }
-        @keyframes slide-up {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
-    <h1>Los Insanos</h1>
-    <div class="miembro">
-        <h2 class="nombre">Dilan</h2>
-        <p class="descripcion">Dilan, El tegnologico del grupo ¡asegura bien tus cuentas bancarias!.</p>
-        <a href="https://www.instagram.com/dilanenriquez50/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Dante</h2>
-        <p class="descripcion">Dante, Es un manipulador tan inteligente que cambiará de personalidad con tal de conseguir lo que quiere.</p>
-        <a href="https://www.instagram.com/dante_sequeira_17/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Cristian</h2>
-        <p class="descripcion">Cristian, el "optimista", siempre ve la luz al final del túnel, aunque usualmente es un tren.</p>
-        <a href="https://www.instagram.com/kusiakcristian630?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Axel</h2>
-        <p class="descripcion">Axel, el rebelde del grupo, siempre rompiendo las reglas, incluso las de la gravedad.</p>
-        <a href="https://www.instagram.com/axelcubas2008?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Yunior</h2>
-        <p class="descripcion">Yunior, el rompecorazones, tan letal que debería venir con una advertencia de la FDA.</p>
-        <a href="https://www.instagram.com/yunior_stempel/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Francisco</h2>
-        <p class="descripcion">Francisco, el estratega, capaz de planear una salida en 5 minutos... que usualmente toma 5 horas.</p>
-        <a href="https://www.instagram.com/frann_kusiak/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro">
-        <h2 class="nombre">Heliberto</h2>
-        <p class="descripcion">Heliberto, el misterioso, tiene tantos secretos que ni él mismo sabe cuáles son verdaderos.</p>
-        <a href="https://www.instagram.com/helibertosequeira/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
-    </div>
-    <div class="miembro" style="animation-delay: 3s;">
-        Creador: Dilan_E
+    <video autoplay muted loop class="video-background">
+        <source src="video.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
+    <div class="content">
+        <h1>Los Insanos</h1>
+        <div class="miembro">
+            <h2 class="nombre">Dilan</h2>
+            <p class="descripcion">Dilan, el tecnológico del grupo. ¡Asegura bien tus cuentas bancarias!</p>
+            <a href="https://www.instagram.com/dilanenriquez50/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Dante</h2>
+            <p class="descripcion">Dante, es un manipulador tan inteligente que cambiará de personalidad con tal de conseguir lo que quiere.</p>
+            <a href="https://www.instagram.com/dante_sequeira_17/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Cristian</h2>
+            <p class="descripcion">Cristian, el optimista, siempre ve la luz al final del túnel, aunque usualmente es un tren.</p>
+            <a href="https://www.instagram.com/kusiakcristian630?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Axel</h2>
+            <p class="descripcion">Axel, el rebelde del grupo, siempre rompiendo las reglas, incluso las de la gravedad.</p>
+            <a href="https://www.instagram.com/axelcubas2008?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Yunior</h2>
+            <p class="descripcion">Yunior, el rompecorazones, tan letal que debería venir con una advertencia de la FDA.</p>
+            <a href="https://www.instagram.com/yunior_stempel/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Francisco</h2>
+            <p class="descripcion">Francisco, el estratega, capaz de planear una salida en 5 minutos... que usualmente toma 5 horas.</p>
+            <a href="https://www.instagram.com/frann_kusiak/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro">
+            <h2 class="nombre">Heliberto</h2>
+            <p class="descripcion">Heliberto, el misterioso, tiene tantos secretos que ni él mismo sabe cuáles son verdaderos.</p>
+            <a href="https://www.instagram.com/helibertosequeira/?utm_source=ig_web_button_share_sheet" target="_blank">Mi Instagram</a>
+        </div>
+        <div class="miembro" style="animation-delay: 3s;">
+            <p class="nombre">Creador: Dilan_E</p>
+        </div>
     </div>
 </body>
 </html>
